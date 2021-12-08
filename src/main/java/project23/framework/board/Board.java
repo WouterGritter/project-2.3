@@ -9,8 +9,8 @@ import project23.framework.player.Player;
 
 import java.util.*;
 
-
 public abstract class Board implements Cloneable {
+
     protected final GameManager gameManager;
     protected final int width, height;
     protected BoardPiece[] pieces;
@@ -125,7 +125,6 @@ public abstract class Board implements Cloneable {
         }
 
         currentPlayerId = startingPlayer.getID();
-
 
         prepareBoard(startingPlayer);
 
@@ -380,6 +379,7 @@ public abstract class Board implements Cloneable {
     /**
      * returns the state of the board. WAITING, PLAYING or GAME_OVER
      * from the enum BoardState.
+     *
      * @return boardState
      */
     public BoardState getBoardState() {
@@ -407,7 +407,6 @@ public abstract class Board implements Cloneable {
     }
 
     /**
-     *
      * @param boardPiece the boardpiece to check
      * @see z#isValidMove(Player asWho, int x, int y)
      */
@@ -425,7 +424,6 @@ public abstract class Board implements Cloneable {
     }
 
     /**
-     *
      * @param x The X-coordinate of the piece to check
      * @param y The Y-coordinate of the piece to check
      * @see #isValidMove(Player asWho, int x, int y)
@@ -471,6 +469,7 @@ public abstract class Board implements Cloneable {
 
     /**
      * counts the pieces on the board for the players.
+     *
      * @return Map<Player, Integer> , key is player, value is the amount of pieces for that player.
      */
     public Map<Player, Integer> piecesCount() {

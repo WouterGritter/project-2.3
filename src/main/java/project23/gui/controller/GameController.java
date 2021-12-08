@@ -10,14 +10,18 @@ import project23.framework.ConfigData;
 import project23.framework.GameManager;
 import project23.gui.MainWindow;
 import project23.gui.model.GameModel;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameController extends Controller<GameModel> implements Initializable {
 
-    @FXML private Pane board;
-    @FXML private Label messageField;
-    @FXML private Label clock;
+    @FXML
+    private Pane board;
+    @FXML
+    private Label messageField;
+    @FXML
+    private Label clock;
 
     /**
      * Sets the labelNode to be used for showInfoMessage() in the model

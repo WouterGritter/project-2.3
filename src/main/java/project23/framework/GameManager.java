@@ -14,6 +14,7 @@ import java.util.function.Function;
  * This class manages a game. Including project23.connection, board and players.
  */
 public class GameManager {
+
     protected final List<BiFunction<Board, Integer, ? extends Player>> playerSuppliers = new ArrayList<>();
 
     protected Board board;
@@ -26,7 +27,8 @@ public class GameManager {
      *
      * @param boardSupplier The board supplier
      */
-    public GameManager(Function<GameManager, ? extends Board> boardSupplier, BiFunction<Board, Integer, ? extends Player>... playerSuppliers) {
+    public GameManager(Function<GameManager, ? extends Board> boardSupplier,
+                       BiFunction<Board, Integer, ? extends Player>... playerSuppliers) {
         this.board = boardSupplier.apply(this);
         this.playerSuppliers.addAll(Arrays.asList(playerSuppliers));
     }
@@ -125,12 +127,14 @@ public class GameManager {
 
     /**
      * Get the other player
+     *
      * @param notThis not this player, but the other one
      * @return the other one
      */
     public Player getOtherPlayer(Player notThis) {
         if (players.size() > 2) {
-            throw new IllegalStateException("There are more than 2 players, please use GameManager#getOtherPlayers instead!");
+            throw new IllegalStateException(
+                    "There are more than 2 players, please use GameManager#getOtherPlayers instead!");
         }
 
         for (Player other : players) {

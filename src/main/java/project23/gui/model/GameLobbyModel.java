@@ -34,6 +34,7 @@ public class GameLobbyModel extends Model implements ConnectedGameManagerObserve
 
     /**
      * Returns the players in the lobby, and keeps a local copy (needed for {@link #challengePlayer(int)})
+     *
      * @return players in lobby
      */
     public List<String> getLobbyPlayers() {
@@ -43,6 +44,7 @@ public class GameLobbyModel extends Model implements ConnectedGameManagerObserve
 
     /**
      * challenges a player, specified by index from the list items in the game lobby
+     *
      * @param playerListIndex the selected index
      */
     public void challengePlayer(int playerListIndex) {
@@ -66,6 +68,7 @@ public class GameLobbyModel extends Model implements ConnectedGameManagerObserve
 
     /**
      * Shows any server errors
+     *
      * @param errorMessage the error message
      */
     @Override
@@ -86,11 +89,13 @@ public class GameLobbyModel extends Model implements ConnectedGameManagerObserve
 
     /**
      * Shows challenge messages, as long as player is not playing
+     *
      * @param challengeRequest the challenge request
      */
     @Override
     public void onChallengeRequestReceive(ChallengeRequest challengeRequest) {
-        if (cgm.getBoard().getBoardState() != BoardState.PLAYING && challengeRequest.getGameType().equals(cgm.getGameType())) {
+        if (cgm.getBoard().getBoardState() != BoardState.PLAYING && challengeRequest.getGameType()
+                .equals(cgm.getGameType())) {
             this.lastChallengeRequest = challengeRequest;
             Platform.runLater(this::updateView); // zodat melding wordt weergegeven
         }
@@ -98,6 +103,7 @@ public class GameLobbyModel extends Model implements ConnectedGameManagerObserve
 
     /**
      * Returns the latest challenge request, and then clears the variable so it cannot be requested again
+     *
      * @return
      */
     public ChallengeRequest getLastChallengeRequest() {
@@ -108,6 +114,7 @@ public class GameLobbyModel extends Model implements ConnectedGameManagerObserve
 
     /**
      * Accepts specified request
+     *
      * @param request the challengerequest
      */
     public void acceptMatch(ChallengeRequest request) {
@@ -128,7 +135,7 @@ public class GameLobbyModel extends Model implements ConnectedGameManagerObserve
     @Override
     public void onPreGameStart() {
         cgm.updateSelfPlayerSupplier(isAI ? ConfigData.getInstance().getCurrentGame().createAIPlayerFactory() :
-                ConfigData.getInstance().getCurrentGame().createLocalPlayerFactory());
+                                             ConfigData.getInstance().getCurrentGame().createLocalPlayerFactory());
     }
 
     /**

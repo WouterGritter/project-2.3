@@ -14,6 +14,7 @@ public enum GameType {
 
     /**
      * Get the gametype by the name the server calls it
+     *
      * @param serverName the server's name for the game (which is wrong)
      * @return game type object
      */

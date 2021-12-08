@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import project23.framework.ChallengeRequest;
 import project23.gui.controller.Controller;
 import project23.gui.model.GameLobbyModel;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,9 +20,9 @@ public class GameLobbyView extends View<GameLobbyModel> {
     /**
      * Makes a new arraylist with challenge dialogs
      *
-     * @param parent, screen nodes (fxml)
-     * @param controller, controller of the nodes
-     * @param windowWidth, width of the window
+     * @param parent,       screen nodes (fxml)
+     * @param controller,   controller of the nodes
+     * @param windowWidth,  width of the window
      * @param windowHeight, height of the window
      */
     public GameLobbyView(Parent parent, Controller controller, int windowWidth, int windowHeight) {
@@ -53,7 +54,7 @@ public class GameLobbyView extends View<GameLobbyModel> {
      */
     public void showChallengeDialog(GameLobbyModel model) {
         ChallengeRequest challengeRequest = model.getLastChallengeRequest();
-        if(challengeRequest == null) {
+        if (challengeRequest == null) {
             return;
         }
 
@@ -92,7 +93,7 @@ public class GameLobbyView extends View<GameLobbyModel> {
      * CLoses all dialogs
      */
     private void closeAllDialogs() {
-        for(Dialog dialog : dialogs) {
+        for (Dialog dialog : dialogs) {
             dialog.close();
         }
         dialogs.clear();

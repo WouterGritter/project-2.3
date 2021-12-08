@@ -1,5 +1,5 @@
 /* CSS for pop-ups*/
-.button{
+.button {
     -fx-background-color: #2E8B57;
     -fx-border: none;
     -fx-text-fill: white;
@@ -9,6 +9,6 @@
     -fx-border-radius: 4px;
 }
 
-.button:hover{
-     -fx-background-color: #555555;
+.button:hover {
+    -fx-background-color: #555555;
 }

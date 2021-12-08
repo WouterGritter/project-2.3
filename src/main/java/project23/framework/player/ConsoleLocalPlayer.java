@@ -13,6 +13,7 @@ import java.util.List;
  */
 @Deprecated
 public class ConsoleLocalPlayer extends LocalPlayer implements MoveRequestable {
+
     public ConsoleLocalPlayer(Board board, int id, String name) {
         super(board, id, name);
     }
@@ -20,7 +21,6 @@ public class ConsoleLocalPlayer extends LocalPlayer implements MoveRequestable {
     public ConsoleLocalPlayer(Board board, int id) {
         super(board, id);
     }
-
 
     @Override
     public void requestMove() {

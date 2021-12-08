@@ -5,6 +5,7 @@ import project23.framework.player.Player;
 import java.util.Objects;
 
 public class BoardPiece implements Cloneable {
+
     private final int x, y;
     private Player owner;
 
@@ -32,8 +33,6 @@ public class BoardPiece implements Cloneable {
     }
 
     // Auto-generated equals method
-
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

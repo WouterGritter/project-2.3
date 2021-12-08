@@ -5,8 +5,9 @@ import javafx.stage.Stage;
 import project23.gui.App;
 
 public class Main {
+
     /**
-     * Used for creating  a jarfile
+     * Used for creating a jarfile
      */
     public static void main(String[] args) {
         Platform.startup(() -> {

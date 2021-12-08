@@ -17,6 +17,7 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class ConnectedGameManager extends GameManager implements GameManagerCommunicationListener, BoardObserver {
+
     private Client client;
 
     private final List<ChallengeRequest> activeChallengeRequests = new ArrayList<>();
@@ -40,7 +41,10 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
      * @param selfPlayerSupplier
      * @throws IOException
      */
-    public ConnectedGameManager(Function<GameManager, Board> boardSupplier, String serverIP, int serverPort, BiFunction<Board, Integer, Player> selfPlayerSupplier) throws IOException {
+    public ConnectedGameManager(Function<GameManager, Board> boardSupplier,
+                                String serverIP,
+                                int serverPort,
+                                BiFunction<Board, Integer, Player> selfPlayerSupplier) throws IOException {
         super(boardSupplier);
 
         updateSelfPlayerSupplier(selfPlayerSupplier);
@@ -105,6 +109,7 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
 
     /**
      * gets a list of names of the lobbyplayers.
+     *
      * @return List<String>
      */
     public List<String> getLobbyPlayers() {
@@ -121,6 +126,7 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
 
     /**
      * method to challenge someone else
+     *
      * @param playerToChallenge
      */
     public void challengePlayer(String playerToChallenge) {
@@ -129,6 +135,7 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
 
     /**
      * method to accept a challenge request.
+     *
      * @param challengeRequest a challengerequest.
      */
     public void acceptChallengeRequest(ChallengeRequest challengeRequest) {
@@ -163,14 +170,16 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
     }
 
     /**
-     *
-     * @param opponent the name of the opponent
+     * @param opponent           the name of the opponent
      * @param gameTypeServerName the type of name.
-     * @param challengeNr the number of the challenge.
+     * @param challengeNr        the number of the challenge.
      */
     @Override
     public void onChallengeRequestReceive(String opponent, String gameTypeServerName, int challengeNr) {
-        ChallengeRequest challengeRequest = new ChallengeRequest(opponent, GameType.getByServerName(gameTypeServerName), challengeNr);
+        ChallengeRequest challengeRequest = new ChallengeRequest(
+                opponent,
+                GameType.getByServerName(gameTypeServerName),
+                challengeNr);
         activeChallengeRequests.add(challengeRequest);
 
         observers.forEach(o -> o.onChallengeRequestReceive(challengeRequest));
@@ -178,7 +187,8 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
 
     /**
      * starts a server match.
-     * @param opponentName the name of the opponent.
+     *
+     * @param opponentName  the name of the opponent.
      * @param playerToBegin the player who begins.
      */
     @Override
@@ -214,7 +224,6 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
         observers.forEach(ConnectedGameManagerObserver::onPostGameStart);
     }
 
-
     @Override
     public void challengeRequestCancelled(int challengeNr) {
         activeChallengeRequests.removeIf(challengeRequest -> challengeRequest.getChallengeNr() == challengeNr);
@@ -222,6 +231,7 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
 
     /**
      * updates the lobbyplayers.
+     *
      * @param lobbyPlayers List of names of lobbyplayers.
      */
     @Override
@@ -235,6 +245,7 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
 
     /**
      * forces ending a match.
+     *
      * @param result string WIN , LOSS or DRAW
      */
     @Override
@@ -264,7 +275,8 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
 
     /**
      * if the player given isn't the serverplayeropponent send a move.
-     * @param who the player who moved.
+     *
+     * @param who   the player who moved.
      * @param where the piece you want to do.
      */
     @Override
@@ -280,7 +292,7 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
 
     @Override
     public void onPlayerMoveFinalized(Player previous, Player current) {
-        if(current != serverPlayerOpponent) {
+        if (current != serverPlayerOpponent) {
             Logger.debug("Self turn started");
             selfPlayerTurnStart = System.currentTimeMillis();
         }

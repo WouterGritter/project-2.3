@@ -3,8 +3,6 @@ package project23.gui.view;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
@@ -40,19 +38,19 @@ public class GameView extends View<GameModel> {
     private Label clock;
     private int seconds;
 
-
     // Cell margin value between 0 (no margin) and 1 (no space for the piece at all)
     public static final double MARGIN = 0.2;
     //private Timeline animation = new Timeline(new KeyFrame(Duration.seconds(1), e -> countDown()));
-    private final Timeline animation = new Timeline(new KeyFrame(Duration.ZERO, actionEvent -> countDown()) , new KeyFrame(Duration.seconds(1)));
+    private final Timeline animation = new Timeline(new KeyFrame(Duration.ZERO, actionEvent -> countDown()),
+                                                    new KeyFrame(Duration.seconds(1)));
 
     /**
      * Sets the game from the view/scene
      * Sets waitingtext
      *
-     * @param parent, screen nodes (fxml)
-     * @param controller, controller of the nodes
-     * @param windowWidth, width of the window
+     * @param parent,       screen nodes (fxml)
+     * @param controller,   controller of the nodes
+     * @param windowWidth,  width of the window
      * @param windowHeight, height of the window
      */
     public GameView(Parent parent, Controller controller, int windowWidth, int windowHeight) {
@@ -75,20 +73,22 @@ public class GameView extends View<GameModel> {
      */
     @Override
     public void update(GameModel model) {
-        if(clock==null) {
+        if (clock == null) {
             clock = model.getClockLabel();
         }
-        if(model.restartClock()) {
+        if (model.restartClock()) {
             resetClock();
         }
-        if(model.stopClock()) {
+        if (model.stopClock()) {
             stopClock();
         }
 
         showDialog(model.getDialogMessage(), model.getDialogTitle());
         showInfoText(model.getInfoMessage(), model.getLabelNode());
 
-        if (model.getBoard().getBoardState() == BoardState.WAITING && !ConfigData.getInstance().getCurrentGame().isOnline()) {
+        if (model.getBoard().getBoardState() == BoardState.WAITING && !ConfigData.getInstance()
+                .getCurrentGame()
+                .isOnline()) {
             setBackgroundColorBoard(null);
             clearBoard();
             gameBoardPane.getChildren().add(waitingText);
@@ -111,15 +111,13 @@ public class GameView extends View<GameModel> {
     public void stopClock() {
         animation.stop();
         Platform.runLater(() -> clock.setText(""));
-
     }
 
     private void countDown() {
-        if(seconds == 1) {
+        if (seconds == 1) {
             Platform.runLater(() -> clock.setText("Time's up!"));
         } else {
             Platform.runLater(() -> clock.setText(--seconds + " seconds remaining"));
-
         }
     }
 
@@ -137,7 +135,6 @@ public class GameView extends View<GameModel> {
 
         setBackgroundColorBoard(ConfigData.getInstance().getCurrentGame().getBoardBackgroundColor());
         setBoardPieceIcons(ConfigData.getInstance().getCurrentGame().getBoardPieceIcons());
-
 
         // Player stats
         showPlayerInformation(model.getPlayerInfo(board.piecesCount()));
@@ -162,7 +159,7 @@ public class GameView extends View<GameModel> {
      * Draws the possible moves for the player
      *
      * @param validMoves, list of possible moves saved in boardpieces
-     * @param gridSize, size of the grid
+     * @param gridSize,   size of the grid
      */
     private void drawValidMoves(List<BoardPiece> validMoves, int gridSize) {
         double cellSize = gameBoardPane.getPrefWidth() / gridSize;
@@ -224,7 +221,7 @@ public class GameView extends View<GameModel> {
      * Draws the gamepiece
      * Gets the coordinates and adds a boardpiece to the coordinate when clicked
      *
-     * @param piece, boardpiece
+     * @param piece,    boardpiece
      * @param gridSize, size of the grid
      */
     public void drawPiece(BoardPiece piece, int gridSize) {
@@ -275,6 +272,7 @@ public class GameView extends View<GameModel> {
 
     /**
      * sets the background color for the game boards
+     *
      * @param color, the color of the background
      */
     public void setBackgroundColorBoard(Color color) {

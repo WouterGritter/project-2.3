@@ -8,6 +8,7 @@ import java.io.File;
 import java.io.IOException;
 
 public class App extends Application {
+
     private static final File LOG_DIRECTORY = new File("logs/");
 
     /**

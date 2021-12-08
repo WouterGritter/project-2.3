@@ -10,9 +10,7 @@ import project23.framework.board.BoardObserver;
 import project23.framework.board.BoardPiece;
 import project23.framework.player.LocalPlayer;
 import project23.framework.player.Player;
-import project23.util.Logger;
 
-import java.net.URL;
 import java.util.ArrayList;
 import java.util.Map;
 
@@ -133,11 +131,12 @@ public class GameModel extends Model implements BoardObserver {
     /**
      * Whether the clock should be set to 10 again.
      * When this method is called, {@link #restartClock} is automatically set to false.
+     *
      * @return whether the clock should be reset
      */
     public boolean restartClock() {
         // clock should only work on multiplayer matches
-        if(restartClock && gameManager instanceof ConnectedGameManager) {
+        if (restartClock && gameManager instanceof ConnectedGameManager) {
             restartClock = false;
             return true;
         } else {
@@ -157,10 +156,11 @@ public class GameModel extends Model implements BoardObserver {
      * Whether the clock must be stopped.
      * When this method is called, {@link #stopClock} is automatically set to false. Otherwise the clock
      * might never run again.
+     *
      * @return whether clock must be stopped
      */
     public boolean stopClock() {
-        if(stopClock) {
+        if (stopClock) {
             stopClock = false;
             return true;
         } else {

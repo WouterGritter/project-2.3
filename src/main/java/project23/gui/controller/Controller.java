@@ -4,6 +4,7 @@ import project23.gui.MainWindow;
 import project23.gui.model.Model;
 
 public abstract class Controller<T extends Model> {
+
     protected T model;
     protected MainWindow mainWindow;
 
