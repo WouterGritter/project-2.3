@@ -18,6 +18,7 @@ import java.util.function.Function;
  * Returns relevant Board-objects, Player-objects (and more?)
  */
 public abstract class Game {
+
     public static final String AI_NAME = "Computer";
 
     private boolean online = false;
@@ -84,7 +85,6 @@ public abstract class Game {
         return online;
     }
 
-
     public String getHelpText() {
         if (helpText == null) {
             loadHelpFile();
@@ -95,7 +95,8 @@ public abstract class Game {
     // Moet aangeroepen worden door child-klassen
     protected void loadHelpFile() {
         StringBuilder helpTextBuilder = new StringBuilder();
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream("/helpfiles/" + getGameType().serverName + "-help.txt")))) {
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(getClass().getResourceAsStream(
+                "/helpfiles/" + getGameType().serverName + "-help.txt")))) {
             String line;
             while ((line = reader.readLine()) != null) {
                 helpTextBuilder.append(line + "\n");

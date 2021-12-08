@@ -6,6 +6,7 @@ import project23.gui.view.View;
 import java.util.ArrayList;
 
 public abstract class Model {
+
     private ArrayList<View> observers;
     private String dialogMessage = ""; // pop-up dialog
     private String dialogTitle = "";
@@ -26,7 +27,6 @@ public abstract class Model {
         }
     }
 
-
     public void setDialogMessageAndTitle(String message, String title) {
         this.dialogMessage = message;
         this.dialogTitle = title;
@@ -45,6 +45,7 @@ public abstract class Model {
 
     /**
      * Gets the dialog title, and then clears it
+     *
      * @return the title
      */
     public String getDialogTitle() {
@@ -77,6 +78,7 @@ public abstract class Model {
 
     /**
      * Used when setting infoText. See {@link View#showInfoText(String, Label)}
+     *
      * @return
      */
     public Label getLabelNode() {

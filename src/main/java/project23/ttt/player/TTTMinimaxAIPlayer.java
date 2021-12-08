@@ -5,6 +5,7 @@ import project23.framework.player.MinimaxAIPlayer;
 import project23.framework.player.Player;
 
 public class TTTMinimaxAIPlayer extends MinimaxAIPlayer {
+
     public TTTMinimaxAIPlayer(Board board, int id, String name, AIDifficulty difficulty) {
         super(board, id, name, difficulty);
     }

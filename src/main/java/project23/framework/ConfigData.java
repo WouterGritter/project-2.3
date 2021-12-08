@@ -3,6 +3,7 @@ package project23.framework;
 import project23.framework.player.MinimaxAIPlayer;
 import project23.othello.OthelloGame;
 import project23.ttt.TTTGame;
+
 import java.util.HashMap;
 
 public class ConfigData {

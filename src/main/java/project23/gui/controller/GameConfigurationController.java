@@ -12,6 +12,7 @@ import project23.framework.ConfigData;
 import project23.framework.player.MinimaxAIPlayer;
 import project23.gui.MainWindow;
 import project23.gui.model.GameConfigurationModel;
+
 import java.net.URL;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -19,11 +20,16 @@ import java.util.stream.Collectors;
 
 public class GameConfigurationController extends Controller<GameConfigurationModel> implements Initializable {
 
-    @FXML private Label ipConfirmation;
-    @FXML private TextField ipAddressField;
-    @FXML private TextField portField;
-    @FXML private ComboBox<String> comboBoxDifficulty;
-    @FXML private TextField thinkingTimeField;
+    @FXML
+    private Label ipConfirmation;
+    @FXML
+    private TextField ipAddressField;
+    @FXML
+    private TextField portField;
+    @FXML
+    private ComboBox<String> comboBoxDifficulty;
+    @FXML
+    private TextField thinkingTimeField;
 
     ObservableList<String> options = FXCollections.observableArrayList(
             Arrays.stream(MinimaxAIPlayer.AIDifficulty.values())

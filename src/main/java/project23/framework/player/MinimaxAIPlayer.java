@@ -15,6 +15,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver {
+
     private AIDifficulty difficulty;
 
     private final Object minimaxSessionLock = new Object();
@@ -44,7 +45,8 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
 
     /**
      * evaluates the board
-     * @param board the current board situation
+     *
+     * @param board     the current board situation
      * @param treeDepth the current depth of the minimax tree
      * @return a positive(we are winning) or negative(we are losing) float value
      */
@@ -146,6 +148,7 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
     /**
      * Picks the best move out of the minimax tree.
      * Chooses a random valid move if minimax could not come up with a best move.
+     *
      * @param session current threading session
      */
     private void onMinimaxDone(UUID session) {
@@ -167,7 +170,8 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
         List<BoardPiece> validMoves = board.getValidMoves(this);
         if (!validMoves.isEmpty()) {
             if (bestMove == null) {
-                Logger.error("Minimax couldn't come up with a best move, but there are more than 0 valid moves! Sending a random move..");
+                Logger.error(
+                        "Minimax couldn't come up with a best move, but there are more than 0 valid moves! Sending a random move..");
                 bestMove = validMoves.get((int) (Math.random() * validMoves.size()));
             }
 
@@ -190,9 +194,9 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
         Logger.info("Found best move " + bestMove + " with a value of " + bestMoveValue + " at a depth of " + highestDepthValue + ".");
 
         StringBuilder certaintyMessage = new StringBuilder();
-        if(Math.abs(bestMoveValue) < 0.8f) {
+        if (Math.abs(bestMoveValue) < 0.8f) {
             certaintyMessage.append("I can't tell who will win if the opponent plays perfectly.");
-        }else{
+        } else {
             certaintyMessage.append("We are ");
             if (anyEndedInNonGameOverValue) {
                 if (Math.abs(bestMoveValue) > 2.0f) {
@@ -224,8 +228,9 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
 
     /**
      * Executes minimax algorithm on async threads
+     *
      * @param session current thread session
-     * @param depth minimax tree depth
+     * @param depth   minimax tree depth
      */
     private void performAsyncMinimax(UUID session, int depth) {
         synchronized (minimaxSessionLock) {
@@ -393,13 +398,16 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
     }
 
     @Override
-    public void onPlayerMoved(Player who, BoardPiece where) {}
+    public void onPlayerMoved(Player who, BoardPiece where) {
+    }
 
     @Override
-    public void onPlayerMoveFinalized(Player previous, Player current) {}
+    public void onPlayerMoveFinalized(Player previous, Player current) {
+    }
 
     @Override
-    public void onGameStart(Player startingPlayer) {}
+    public void onGameStart(Player startingPlayer) {
+    }
 
     @Override
     public void onPlayerWon(Player who) {

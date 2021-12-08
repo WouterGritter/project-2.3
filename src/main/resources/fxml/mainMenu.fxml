@@ -3,15 +3,19 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
-
 <BorderPane id="background" stylesheets="@/CSS/style.css">
     <center>
-        <AnchorPane maxHeight="275.0" maxWidth="325.0" minHeight="275.0" minWidth="325.0" prefHeight="275.0" prefWidth="325.0" BorderPane.alignment="CENTER">
+        <AnchorPane maxHeight="275.0" maxWidth="325.0" minHeight="275.0" minWidth="325.0" prefHeight="275.0"
+                    prefWidth="325.0" BorderPane.alignment="CENTER">
             <children>
-                <Button id="buttonOthello" layoutX="171.0" layoutY="14.0" prefHeight="140.0" prefWidth="140.0" onAction="#pressOthelloMenuButton"/>
-                <Button layoutX="14.0" layoutY="220.0" prefHeight="40.0" prefWidth="300.0" text="EXIT" onAction="#pressExitButton"/>
-                <Button id="buttonTTT" layoutX="14.0" layoutY="14.0" prefHeight="140.0" prefWidth="140.0" onAction="#pressTTTMenuButton"/>
-                <Button layoutX="14.0" layoutY="167.0" prefHeight="40.0" prefWidth="300.0" text="OPTIONS" onAction="#pressConfigurationButton"/>
+                <Button id="buttonOthello" layoutX="171.0" layoutY="14.0" prefHeight="140.0" prefWidth="140.0"
+                        onAction="#pressOthelloMenuButton"/>
+                <Button layoutX="14.0" layoutY="220.0" prefHeight="40.0" prefWidth="300.0" text="EXIT"
+                        onAction="#pressExitButton"/>
+                <Button id="buttonTTT" layoutX="14.0" layoutY="14.0" prefHeight="140.0" prefWidth="140.0"
+                        onAction="#pressTTTMenuButton"/>
+                <Button layoutX="14.0" layoutY="167.0" prefHeight="40.0" prefWidth="300.0" text="OPTIONS"
+                        onAction="#pressConfigurationButton"/>
             </children>
         </AnchorPane>
     </center>

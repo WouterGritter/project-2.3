@@ -15,9 +15,12 @@ import java.util.ResourceBundle;
 
 public class GameLobbyController extends Controller<GameLobbyModel> implements Initializable {
 
-    @FXML private ListView challengerList;
-    @FXML private CheckBox isAIBox;
-    @FXML private Label messageLabel;
+    @FXML
+    private ListView challengerList;
+    @FXML
+    private CheckBox isAIBox;
+    @FXML
+    private Label messageLabel;
 
     /**
      * Switches back to the main menu view

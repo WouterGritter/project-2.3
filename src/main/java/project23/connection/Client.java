@@ -9,6 +9,7 @@ import java.io.PrintWriter;
 import java.net.Socket;
 
 public class Client extends Thread {
+
     private static final long KEEP_ALIVE_INTERVAL = 30 * 1000;
 
     private final Socket clientSocket;
@@ -17,7 +18,6 @@ public class Client extends Thread {
     private PrintWriter outputStream;
 
     private boolean running = true;
-
 
     /**
      * @param clientSocket         The clientsocket
@@ -57,7 +57,8 @@ public class Client extends Thread {
      */
     private void consolePassthrough() {
         if (!Logger.DEBUG) {
-            Logger.warning("Warning! Starting console <> server command passthrough, but CommunicationHandler.DEBUG is set to false! You won't receive any feedback!");
+            Logger.warning(
+                    "Warning! Starting console <> server command passthrough, but CommunicationHandler.DEBUG is set to false! You won't receive any feedback!");
         } else {
             Logger.info("Console <> server command passthrough started.");
         }
@@ -122,7 +123,6 @@ public class Client extends Thread {
         outputStream.flush();
     }
 
-
     /**
      * Reads server messages and sends them off to be handled
      */
@@ -174,6 +174,7 @@ public class Client extends Thread {
 
     /**
      * Passthrough method, calls communicationHandler#move
+     *
      * @param move move chosen by the player or AI
      */
     public void sendMoveMessage(int move) {
@@ -182,6 +183,7 @@ public class Client extends Thread {
 
     /**
      * Subscribe to random matches for the given game type
+     *
      * @param gameType the game to for which to subscribe
      */
     public void sendSubscribeMessage(String gameType) {
@@ -190,6 +192,7 @@ public class Client extends Thread {
 
     /**
      * Logs the player into the server
+     *
      * @param playerName the player name
      */
     public void sendLoginMessage(String playerName) {
@@ -198,8 +201,9 @@ public class Client extends Thread {
 
     /**
      * Sends a challenge to a player in the lobby
+     *
      * @param playerToChallenge the player to challenge
-     * @param gameType the game to play
+     * @param gameType          the game to play
      */
     public void sendChallengeMessage(String playerToChallenge, String gameType) {
         communicationHandler.sendChallengeMessage(playerToChallenge, gameType);
@@ -214,6 +218,7 @@ public class Client extends Thread {
 
     /**
      * Accepts a challenge
+     *
      * @param challengeNr the challenge number
      */
     public void acceptChallenge(int challengeNr) {

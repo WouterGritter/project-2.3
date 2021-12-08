@@ -24,9 +24,9 @@ public abstract class View<T extends Model> extends Scene {
     /**
      * Sets the controller to be used
      *
-     * @param parent, screen nodes (fxml)
-     * @param controller, controller of the nodes
-     * @param windowWidth, width of the window
+     * @param parent,       screen nodes (fxml)
+     * @param controller,   controller of the nodes
+     * @param windowWidth,  width of the window
      * @param windowHeight, height of the window
      */
     public View(Parent parent, Controller controller, int windowWidth, int windowHeight) {
@@ -41,12 +41,11 @@ public abstract class View<T extends Model> extends Scene {
      */
     public abstract void update(T model);
 
-
     /**
      * Dialog is a pop-up message
      * Makes new dialog, adds message and icons, shows the dialog
      *
-     * @param message, the message that needs to be shown
+     * @param message,     the message that needs to be shown
      * @param dialogTitle, title of the pop-up
      */
     public void showDialog(String message, String dialogTitle) {
@@ -61,7 +60,9 @@ public abstract class View<T extends Model> extends Scene {
             dialog.getDialogPane().getButtonTypes().add(type);
             dialog.getDialogPane().setMinHeight(Region.USE_PREF_SIZE);
             dialog.getDialogPane().setMinWidth(Region.USE_PREF_SIZE);
-            dialog.getDialogPane().getStylesheets().add(getClass().getResource("/CSS/dialogStyle.css").toExternalForm());
+            dialog.getDialogPane()
+                    .getStylesheets()
+                    .add(getClass().getResource("/CSS/dialogStyle.css").toExternalForm());
             dialog.setTitle(dialogTitle);
             Stage dialogStage = (Stage) dialog.getDialogPane().getScene().getWindow();
             dialogStage.getIcons().add(new Image(getClass().getResource("/images/icon.png").toExternalForm()));
@@ -94,5 +95,4 @@ public abstract class View<T extends Model> extends Scene {
             }).start();
         }
     }
-
 }

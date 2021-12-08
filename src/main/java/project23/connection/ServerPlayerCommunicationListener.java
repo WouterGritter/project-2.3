@@ -4,8 +4,9 @@ public interface ServerPlayerCommunicationListener {
 
     /**
      * Handler for when we receive a MOVE message from the server
+     *
      * @param whoPlayer the player that made the move
-     * @param move the move
+     * @param move      the move
      */
     void turnReceive(String whoPlayer, String move);
 

@@ -2,9 +2,9 @@ package project23.framework;
 
 public interface ConnectedGameManagerObserver {
 
-
     /**
      * Handler for server error messages
+     *
      * @param errorMessage the error message from the server
      */
     void onServerError(String errorMessage);
@@ -16,6 +16,7 @@ public interface ConnectedGameManagerObserver {
 
     /**
      * Handler for when we receive a challenge request
+     *
      * @param challengeRequest the challenge request
      */
     void onChallengeRequestReceive(ChallengeRequest challengeRequest);
