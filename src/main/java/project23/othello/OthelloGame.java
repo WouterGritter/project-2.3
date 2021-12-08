@@ -17,14 +17,20 @@ import java.util.function.BiFunction;
 import java.util.function.Function;
 
 public class OthelloGame extends Game {
+
     private final String[] boardPieceNames = {"Black", "White"};
-    private final List<URL> boardPieceIcons = Arrays.asList(getClass().getResource("/images/boardPieces/othello_black.png"), getClass().getResource("/images/boardPieces/othello_white.png"));
+    private final List<URL> boardPieceIcons = Arrays.asList(getClass().getResource(
+            "/images/boardPieces/othello_black.png"), getClass().getResource("/images/boardPieces/othello_white.png"));
     private final boolean showPiecesCount = true;
     private final Color colors = Color.rgb(0, 153, 0);
 
     @Override
     public BiFunction<Board, Integer, Player> createAIPlayerFactory() {
-        return (board, id) -> new OthelloMinimaxAIPlayer(board, id, Game.AI_NAME, ConfigData.getInstance().getAIDifficulty());
+        return (board, id) -> new OthelloMinimaxAIPlayer(
+                board,
+                id,
+                Game.AI_NAME,
+                ConfigData.getInstance().getAIDifficulty());
     }
 
     @Override
@@ -42,6 +48,7 @@ public class OthelloGame extends Game {
 
     /**
      * returns a list of icons for the boardpiece
+     *
      * @return List<URL>
      */
     @Override
@@ -51,6 +58,7 @@ public class OthelloGame extends Game {
 
     /**
      * names of the boardpieces.
+     *
      * @return String[] boardpiecenames
      */
     @Override
@@ -60,6 +68,7 @@ public class OthelloGame extends Game {
 
     /**
      * framework.GameType
+     *
      * @return GameType.OTHELLO
      */
     @Override
@@ -69,6 +78,7 @@ public class OthelloGame extends Game {
 
     /**
      * if it should show the pieces count on the GUI or not.
+     *
      * @return boolean
      */
     @Override

@@ -11,10 +11,12 @@ import project23.gui.model.GameLobbyModel;
 import project23.gui.model.GameMenuModel;
 import project23.gui.model.GameModel;
 import project23.gui.view.*;
+
 import java.io.IOException;
 import java.util.Objects;
 
 public class MainWindow {
+
     private Stage stage;
     private GameConfigurationView gcView;
     private GameView gView;
@@ -48,7 +50,8 @@ public class MainWindow {
         stage.setOnCloseRequest(windowEvent -> this.quit());
 
         //stage = primaryStage;
-        stage.getIcons().add(new Image(Objects.requireNonNull(getClass().getResource("/images/icon.png")).toExternalForm()));
+        stage.getIcons()
+                .add(new Image(Objects.requireNonNull(getClass().getResource("/images/icon.png")).toExternalForm()));
         stage.setTitle("C4Games");
         switchView(ViewEnum.MAINMENU);
     }

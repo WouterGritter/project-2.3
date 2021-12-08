@@ -150,7 +150,7 @@ public class OthelloBoard extends Board {
     /**
      * this method captures pieces of the opponent starting from the provided piece in the direction specified.
      *
-     * @param piece the piece you want to place on the board.
+     * @param piece   the piece you want to place on the board.
      * @param xchange the horizontal direction the line goes in.
      * @param ychange the vertical direction the line goes in.
      */
@@ -240,6 +240,7 @@ public class OthelloBoard extends Board {
 
     /**
      * preparing the othelloboard with the original starting lineup.
+     *
      * @param startPlayer The player who will start.
      */
     @Override
@@ -252,6 +253,7 @@ public class OthelloBoard extends Board {
 
     /**
      * getter for the game type, in this case the Othello gametype.
+     *
      * @return GameType.OTHELLO
      */
     @Override

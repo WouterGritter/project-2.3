@@ -11,7 +11,8 @@ import project23.gui.model.MainMenuModel;
 
 public class MainMenuController extends Controller<MainMenuModel> {
 
-    @FXML private Text actiontarget;
+    @FXML
+    private Text actiontarget;
 
     /**
      * Switches to the TTT view

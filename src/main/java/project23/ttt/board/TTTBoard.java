@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TTTBoard extends Board {
+
     public TTTBoard(GameManager gameManager) {
         super(gameManager, 3, 3);
     }

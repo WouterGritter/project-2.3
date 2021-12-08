@@ -8,6 +8,7 @@ import project23.util.Logger;
  * This class is a subclass of Player and stores a ServerPlayer.
  */
 public class ServerPlayer extends Player implements ServerPlayerCommunicationListener {
+
     public ServerPlayer(Board board, int id, String name) {
         super(board, id, name);
     }
@@ -18,8 +19,9 @@ public class ServerPlayer extends Player implements ServerPlayerCommunicationLis
 
     /**
      * method for after receiving move from the server.
+     *
      * @param whoPlayer the name of player whose turn it is.
-     * @param move the number of the move as string.
+     * @param move      the number of the move as string.
      */
     @Override
     public void turnReceive(String whoPlayer, String move) {

@@ -10,11 +10,11 @@ import java.util.List;
 import java.util.Locale;
 
 public class CommunicationHandler {
+
     private Client client;
 
     private GameManagerCommunicationListener gameManagerCommunicationListener;
     private ServerPlayerCommunicationListener serverPlayerCommunicationListener;
-
 
     public void setClient(Client client) {
         this.client = client;
@@ -49,7 +49,9 @@ public class CommunicationHandler {
                         switch (split[2].toUpperCase(Locale.ROOT)) {
                             case "MATCH":
                                 //A match was assigned to our client.
-                                gameManagerCommunicationListener.startServerMatch(json.getString("OPPONENT"), json.getString("PLAYERTOMOVE"));
+                                gameManagerCommunicationListener.startServerMatch(
+                                        json.getString("OPPONENT"),
+                                        json.getString("PLAYERTOMOVE"));
                                 break;
                             case "YOURTURN":
                                 //It is our turn in the match, so finalize the turn of the ServerPlayer
@@ -57,7 +59,9 @@ public class CommunicationHandler {
                                 break;
                             case "MOVE":
                                 //The opponent has made a move
-                                serverPlayerCommunicationListener.turnReceive(json.getString("PLAYER"), json.getString("MOVE"));
+                                serverPlayerCommunicationListener.turnReceive(
+                                        json.getString("PLAYER"),
+                                        json.getString("MOVE"));
                                 break;
                             case "CHALLENGE":
                                 //There is new information regarding a challenge!
@@ -68,7 +72,10 @@ public class CommunicationHandler {
                                 } else {
                                     String challenger = json.getString("CHALLENGER");
                                     String gametype = json.getString("GAMETYPE");
-                                    gameManagerCommunicationListener.onChallengeRequestReceive(challenger, gametype, challengeNumber);
+                                    gameManagerCommunicationListener.onChallengeRequestReceive(
+                                            challenger,
+                                            gametype,
+                                            challengeNumber);
                                 }
                                 break;
                             case "WIN":
@@ -184,7 +191,6 @@ public class CommunicationHandler {
     public void sendForfeitMessage() {
         client.sendCommandToServer("forfeit \n");
     }
-
 
     /**
      * Challenges a player in the lobby

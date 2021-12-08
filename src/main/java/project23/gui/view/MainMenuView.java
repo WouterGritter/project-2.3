@@ -11,5 +11,6 @@ public class MainMenuView extends View<MainMenuModel> {
     }
 
     @Override
-    public void update(MainMenuModel model) {}
+    public void update(MainMenuModel model) {
+    }
 }

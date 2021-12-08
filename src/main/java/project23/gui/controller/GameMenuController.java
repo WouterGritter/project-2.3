@@ -8,13 +8,16 @@ import javafx.scene.control.TextField;
 import project23.framework.ConfigData;
 import project23.gui.MainWindow;
 import project23.gui.model.GameMenuModel;
+
 import java.net.URL;
 import java.util.ResourceBundle;
 
 public class GameMenuController extends Controller<GameMenuModel> implements Initializable {
 
-    @FXML Label usernameConfirmation;
-    @FXML TextField usernameField;
+    @FXML
+    Label usernameConfirmation;
+    @FXML
+    TextField usernameField;
 
     /**
      * Sets the labelNode to be used for showInfoMessage()

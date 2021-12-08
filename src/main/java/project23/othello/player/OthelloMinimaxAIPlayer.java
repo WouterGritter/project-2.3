@@ -5,20 +5,21 @@ import project23.framework.player.MinimaxAIPlayer;
 import project23.framework.player.Player;
 
 public class OthelloMinimaxAIPlayer extends MinimaxAIPlayer {
+
     /**
      * Weights for every project23.othello piece.
      * https://github.com/Jules-Lion/kurwa/blob/master/Dokumentation/An%20Analysis%20of%20Heuristics%20in%20Othello.pdf
      * The weight matrix is extract from the paper called "An Analysis of Heuristic in Othello"
      */
     private static final float[][] PIECE_WEIGHTS = {
-            { 4, -3,  2,  2,  2,  2, -3,  4},
+            {4, -3, 2, 2, 2, 2, -3, 4},
             {-3, -4, -1, -1, -1, -1, -4, -3},
-            { 2, -1,  1,  0,  0,  1, -1,  2},
-            { 2, -1,  0,  1,  1,  0, -1,  2},
-            { 2, -1,  0,  1,  1,  0, -1,  2},
-            { 2, -1,  1,  0,  0,  1, -1,  2},
+            {2, -1, 1, 0, 0, 1, -1, 2},
+            {2, -1, 0, 1, 1, 0, -1, 2},
+            {2, -1, 0, 1, 1, 0, -1, 2},
+            {2, -1, 1, 0, 0, 1, -1, 2},
             {-3, -4, -1, -1, -1, -1, -4, -3},
-            { 4, -3,  2,  2,  2,  2, -3,  4}
+            {4, -3, 2, 2, 2, 2, -3, 4}
     };
 
     public OthelloMinimaxAIPlayer(Board board, int id, String name, AIDifficulty difficulty) {

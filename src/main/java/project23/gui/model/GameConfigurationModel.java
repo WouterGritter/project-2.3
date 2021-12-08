@@ -6,7 +6,8 @@ public class GameConfigurationModel extends Model {
 
     /**
      * Sets IP and port in ConfigData, used to connect to server for multiplayer matches
-     * @param ip the IP, like server.domain.com or 12.34.567.890
+     *
+     * @param ip   the IP, like server.domain.com or 12.34.567.890
      * @param port port, must be an integer
      */
     public void setIPandPort(String ip, String port) {
@@ -21,6 +22,7 @@ public class GameConfigurationModel extends Model {
 
     /**
      * Sets timelimit the AI can tink for before stoppng
+     *
      * @param aiThinkingTime time in milliseconds
      */
     public void setAIThinkingTime(String aiThinkingTime) {

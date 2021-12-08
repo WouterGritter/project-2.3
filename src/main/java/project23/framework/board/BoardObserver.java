@@ -3,6 +3,7 @@ package project23.framework.board;
 import project23.framework.player.Player;
 
 public interface BoardObserver {
+
     /**
      * A handler for when a player moves (aka when the board state gets updated).
      */

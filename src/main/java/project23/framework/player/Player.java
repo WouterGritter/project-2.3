@@ -6,6 +6,7 @@ import project23.framework.board.Board;
  * This abstract class stores a player, including the Board.
  */
 public abstract class Player {
+
     protected final Board board;
     protected final int id;
     protected String name;
