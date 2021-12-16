@@ -1,6 +1,5 @@
 ![Het winnende bod en het scorebord. Top 4 is C4, A5, A1 en D3](https://i.imgur.com/uT0vMv9.png)
-
-<i><p align="center">Het winnende potje en het scorebord</p></i>
+_Het winnende potje en het scorebord_
 
 # Project 2.3
 
@@ -9,6 +8,10 @@ Door groep C4: [Marijn Kok](https://github.com/2zqa), [Naomi Verkade](https://gi
 Dit project is een java-applicatie geschreven om bordspellen te spelen. Het kent twee spellen: Othello en boter kaas en eieren. Het project bevat een framework voor bordspellen, ondersteuning voor offline en online wedstrijden, een minimax AI en een JavaFX frontend. Online wedstrijden gaan via Hanze's eigen multiplayer serversoftware.
 
 Op het Othellotournooi van 2021 op de HBO-ICT studie van de Hanzehogeschool Groningen heeft dit project tegen 17 andere AIs de eerste plek gehaald.
+
+## Lokaal draaien
+
+Om het programma lokaal te draaien zal enkel maven geïnstalleerd moeten zijn. Wanneer maven geinstalleerd is, kan het programma uitgevoerd worden met het commando `mvn clean javafx:run`
 
 ## Toelichting AI implementatie
 
@@ -23,5 +26,4 @@ Wij dachten zelf dat dit alleen niet goed genoeg was om het tournament te winnen
 Het tweede foefje is de maximale bedenktijd van het tournament te nuttigen (10 seconden). Hoe lang het duurt om een bepaalde diepte af te lopen in de minimax boom verschilt veel. Dit hangt niet alleen af van de beginsituatie, maar ook de situaties verder in de boom. Daarom lopen wij constant de minimax-boom (multithreaded) af, tot de tijd om is. Soms komt de boom niet verder dan de begin-diepte van 5, maar vaak komt de AI ook tot diepte 8-9. Richting het eind, wanneer er steeds minder valide zetten mogelijk zijn, is het mogelijk om met onze AI de boom tot diepte 12-14 af te lopen, zodat wij de laatste zetten zetten met een volledige blik op de toekomst en eindsituatie. Dit is waarschijnlijk hoe wij in het eindtoernooi op het allerlaatst een grote comeback konden krijgen.
 
 ![log tijdens het spelen van het winnende potje. Er zijn twee regels tekst geselecteerd waar staat dat we het potje met zekerheid zullen winnen, ongeacht wat de tegenstander doet](https://i.imgur.com/RhmzVrT.png)
-
 _Log tijdens het spelen van het winnende potje_
