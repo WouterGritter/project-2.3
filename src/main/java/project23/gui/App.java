@@ -28,6 +28,8 @@ public class App extends Application {
         Logger.info("Logging console output to " + logFile.getAbsolutePath());
         Logger.info("Starting app..");
 
+        Logger.info("Current PID: " + ProcessHandle.current().pid());
+
         MainWindow mainWindow = new MainWindow(primaryStage);
         mainWindow.switchView(MainWindow.ViewEnum.MAINMENU);
     }
