@@ -6,9 +6,11 @@ import project23.framework.Game;
 import project23.framework.GameManager;
 import project23.framework.GameType;
 import project23.framework.board.Board;
+import project23.framework.player.MinimaxAIPlayer;
 import project23.framework.player.Player;
 import project23.othello.board.OthelloBoard;
 import project23.othello.player.OthelloMinimaxAIPlayer;
+import project23.util.Logger;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -23,6 +25,18 @@ public class OthelloGame extends Game {
             "/images/boardPieces/othello_black.png"), getClass().getResource("/images/boardPieces/othello_white.png"));
     private final boolean showPiecesCount = true;
     private final Color colors = Color.rgb(0, 153, 0);
+
+    @Override
+    public BiFunction<Board, Integer, Player> createLocalPlayerFactory() {
+        Logger.info("Overriding local player factory to an AI player for the research experiments.");
+
+        // TODO: Return our newly implemented AI player.
+        return (board, id) -> new OthelloMinimaxAIPlayer(
+                board,
+                id,
+                "Research resit AI",
+                MinimaxAIPlayer.AIDifficulty.EASY);
+    }
 
     @Override
     public BiFunction<Board, Integer, Player> createAIPlayerFactory() {
