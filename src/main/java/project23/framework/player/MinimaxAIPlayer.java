@@ -6,6 +6,7 @@ import project23.framework.board.Board;
 import project23.framework.board.BoardObserver;
 import project23.framework.board.BoardPiece;
 import project23.util.Logger;
+import project23.util.MeasurementLogger;
 
 import java.util.HashSet;
 import java.util.List;
@@ -28,6 +29,8 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
     private final AtomicBoolean anyEndedInNonGameOver = new AtomicBoolean();
     private final AtomicInteger highestDepth = new AtomicInteger();
     private final Set<UUID> runningThreads = new HashSet<>();
+
+    private long moveStart;
 
     public MinimaxAIPlayer(Board board, int id, String name, AIDifficulty difficulty) {
         super(board, id, name);
@@ -70,6 +73,8 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
      */
     @Override
     public void requestMove() {
+        moveStart = System.currentTimeMillis();
+
         List<BoardPiece> validMoves = board.getValidMoves(this);
         if (validMoves.size() == 0) {
             board.makeMove(this, null);
@@ -108,6 +113,9 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
         if (!validMoves.isEmpty()) {
             randomMove = validMoves.get((int) (Math.random() * validMoves.size()));
         }
+
+        long elapsed = System.currentTimeMillis() - moveStart;
+        MeasurementLogger.logTime(difficulty, elapsed);
 
         board.makeMove(this, randomMove);
     }
@@ -222,6 +230,10 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
         }
 
         Logger.info(certaintyMessage.toString());
+
+        long elapsed = System.currentTimeMillis() - moveStart;
+        MeasurementLogger.logTime(difficulty, elapsed);
+        MeasurementLogger.logDepth(difficulty, highestDepthValue);
 
         board.makeMove(this, bestMove);
     }

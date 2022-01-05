@@ -1,5 +1,6 @@
 # App-specific files
 logs/
+measurements/
 
 ### Java algemeen
 # Compiled class file
