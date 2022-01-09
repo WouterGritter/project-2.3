@@ -14,6 +14,7 @@ import java.util.Set;
 import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver {
 
@@ -31,6 +32,7 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
     private final Set<UUID> runningThreads = new HashSet<>();
 
     private long moveStart;
+    private final AtomicLong simulatedMoves = new AtomicLong();
 
     public MinimaxAIPlayer(Board board, int id, String name, AIDifficulty difficulty) {
         super(board, id, name);
@@ -235,6 +237,11 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
         MeasurementLogger.logTime(difficulty, elapsed);
         MeasurementLogger.logDepth(difficulty, highestDepthValue);
 
+        synchronized (simulatedMoves) {
+            MeasurementLogger.logSimulatedMoves(difficulty, simulatedMoves.get());
+            simulatedMoves.set(0);
+        }
+
         board.makeMove(this, bestMove);
     }
 
@@ -340,6 +347,10 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
             if (minimaxSession != session) {
                 return 0;
             }
+        }
+
+        synchronized (simulatedMoves) {
+            simulatedMoves.incrementAndGet();
         }
 
         // Clone the board

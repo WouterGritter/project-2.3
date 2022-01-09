@@ -46,4 +46,17 @@ public class MeasurementLogger {
             throw new UncheckedIOException(e);
         }
     }
+
+    public static void logSimulatedMoves(MinimaxAIPlayer.AIDifficulty difficulty, long simulatedMoves) {
+        try {
+            File file = new File(LOG_FOLDER, "simulated-moves-" + difficulty + ".txt");
+            BufferedWriter writer = new BufferedWriter(new FileWriter(file, true));
+
+            writer.write(String.valueOf(simulatedMoves));
+            writer.newLine();
+            writer.close();
+        } catch (IOException e) {
+            throw new UncheckedIOException(e);
+        }
+    }
 }
