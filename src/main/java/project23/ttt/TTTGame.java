@@ -6,9 +6,10 @@ import project23.framework.Game;
 import project23.framework.GameManager;
 import project23.framework.GameType;
 import project23.framework.board.Board;
+import project23.framework.player.MinimaxAIPlayer;
 import project23.framework.player.Player;
 import project23.ttt.board.TTTBoard;
-import project23.ttt.player.TTTMinimaxAIPlayer;
+import project23.ttt.player.TTTBoardEvaluator;
 
 import java.net.URL;
 import java.util.Arrays;
@@ -27,11 +28,14 @@ public class TTTGame extends Game {
 
     @Override
     public BiFunction<Board, Integer, Player> createAIPlayerFactory() {
-        return (board, id) -> new TTTMinimaxAIPlayer(
+        return (board, id) -> new MinimaxAIPlayer(
                 board,
                 id,
                 Game.AI_NAME,
-                ConfigData.getInstance().getAIDifficulty());
+                ConfigData.getInstance().getAIDifficulty(),
+                new TTTBoardEvaluator(),
+                7
+        );
     }
 
     @Override

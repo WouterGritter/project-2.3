@@ -1,10 +1,10 @@
 package project23.othello.player;
 
 import project23.framework.board.Board;
-import project23.framework.player.MinimaxAIPlayer;
+import project23.framework.player.BoardEvaluator;
 import project23.framework.player.Player;
 
-public class OthelloMinimaxAIPlayer extends MinimaxAIPlayer {
+public class OthelloBoardEvaluator implements BoardEvaluator {
 
     /**
      * Weights for every project23.othello piece.
@@ -22,21 +22,13 @@ public class OthelloMinimaxAIPlayer extends MinimaxAIPlayer {
             {4, -3, 2, 2, 2, 2, -3, 4}
     };
 
-    public OthelloMinimaxAIPlayer(Board board, int id, String name, AIDifficulty difficulty) {
-        super(board, id, name, difficulty);
-    }
-
-    public OthelloMinimaxAIPlayer(Board board, int id, AIDifficulty difficulty) {
-        super(board, id, difficulty);
-    }
-
     @Override
-    protected float evaluateBoard(Board board, int treeDepth) {
+    public float evaluateBoard(Board board, int treeDepth, Player asWho) {
         int selfPieces = 0, otherPieces = 0;
         for (int x = 0; x < 8; x++) {
             for (int y = 0; y < 8; y++) {
                 Player owner = board.getBoardPiece(x, y).getOwner();
-                if (owner == this) {
+                if (owner == asWho) {
                     selfPieces += PIECE_WEIGHTS[x][y];
                 } else if (owner != null) {
                     otherPieces += PIECE_WEIGHTS[x][y];
@@ -49,18 +41,13 @@ public class OthelloMinimaxAIPlayer extends MinimaxAIPlayer {
             value = (float) (selfPieces - otherPieces) / (selfPieces + otherPieces);
         }
 
-        selfPieces += board.getValidMoves(this).size();
-        otherPieces += board.getValidMoves(board.getGameManager().getOtherPlayer(this)).size();
+        selfPieces += board.getValidMoves(asWho).size();
+        otherPieces += board.getValidMoves(board.getGameManager().getOtherPlayer(asWho)).size();
 
         if (selfPieces + otherPieces != 0) {
             value += (float) (selfPieces - otherPieces) / (selfPieces + otherPieces);
         }
 
         return value;
-    }
-
-    @Override
-    public int getStartDepth() {
-        return 5;
     }
 }

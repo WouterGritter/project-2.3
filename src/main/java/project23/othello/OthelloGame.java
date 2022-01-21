@@ -9,7 +9,7 @@ import project23.framework.board.Board;
 import project23.framework.player.MinimaxAIPlayer;
 import project23.framework.player.Player;
 import project23.othello.board.OthelloBoard;
-import project23.othello.player.OthelloMinimaxAIPlayer;
+import project23.othello.player.OthelloBoardEvaluator;
 import project23.util.Logger;
 
 import java.net.URL;
@@ -31,20 +31,26 @@ public class OthelloGame extends Game {
         Logger.info("Overriding local player factory to an AI player for the research experiments.");
 
         // TODO: Return our newly implemented AI player.
-        return (board, id) -> new OthelloMinimaxAIPlayer(
+        return (board, id) -> new MinimaxAIPlayer(
                 board,
                 id,
                 "Research resit AI",
-                MinimaxAIPlayer.AIDifficulty.EASY);
+                MinimaxAIPlayer.AIDifficulty.EASY,
+                new OthelloBoardEvaluator(),
+                6
+        );
     }
 
     @Override
     public BiFunction<Board, Integer, Player> createAIPlayerFactory() {
-        return (board, id) -> new OthelloMinimaxAIPlayer(
+        return (board, id) -> new MinimaxAIPlayer(
                 board,
                 id,
                 Game.AI_NAME,
-                ConfigData.getInstance().getAIDifficulty());
+                ConfigData.getInstance().getAIDifficulty(),
+                new OthelloBoardEvaluator(),
+                6
+        );
     }
 
     @Override

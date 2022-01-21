@@ -14,9 +14,11 @@ import java.util.UUID;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver {
+public class MinimaxAIPlayer extends AIPlayer implements BoardObserver {
 
-    private AIDifficulty difficulty;
+    private final AIDifficulty difficulty;
+    private final BoardEvaluator boardEvaluator;
+    private final int startDepth;
 
     private final Object minimaxSessionLock = new Object();
     private UUID minimaxSession;
@@ -29,33 +31,25 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
     private final AtomicInteger highestDepth = new AtomicInteger();
     private final Set<UUID> runningThreads = new HashSet<>();
 
-    public MinimaxAIPlayer(Board board, int id, String name, AIDifficulty difficulty) {
+    public MinimaxAIPlayer(Board board, int id, String name, AIDifficulty difficulty, BoardEvaluator boardEvaluator, int startDepth) {
         super(board, id, name);
 
         this.difficulty = difficulty;
+        this.boardEvaluator = boardEvaluator;
+        this.startDepth = startDepth;
+
         board.registerObserver(this);
     }
 
-    public MinimaxAIPlayer(Board board, int id, AIDifficulty difficulty) {
+    public MinimaxAIPlayer(Board board, int id, AIDifficulty difficulty, BoardEvaluator boardEvaluator, int startDepth) {
         super(board, id);
 
         this.difficulty = difficulty;
+        this.boardEvaluator = boardEvaluator;
+        this.startDepth = startDepth;
+
         board.registerObserver(this);
     }
-
-    /**
-     * evaluates the board
-     *
-     * @param board     the current board situation
-     * @param treeDepth the current depth of the minimax tree
-     * @return a positive(we are winning) or negative(we are losing) float value
-     */
-    protected abstract float evaluateBoard(Board board, int treeDepth);
-
-    /**
-     * @return The starting depth of the minimax algorithm
-     */
-    public abstract int getStartDepth();
 
     /**
      * Only show valid moves when this AI player is part of a ConnectedGameManager
@@ -130,7 +124,7 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
             highestDepth.set(0);
         }
 
-        performAsyncMinimax(session, getStartDepth());
+        performAsyncMinimax(session, startDepth);
 
         Thread watchdogThread = new Thread(() -> {
             try {
@@ -356,7 +350,7 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
                 }
             }
 
-            return evaluateBoard(board, depth);
+            return boardEvaluator.evaluateBoard(board, depth, this);
         }
 
         Player playerToMove = board.getCurrentPlayer();
@@ -391,10 +385,6 @@ public abstract class MinimaxAIPlayer extends AIPlayer implements BoardObserver 
 
     public AIDifficulty getDifficulty() {
         return difficulty;
-    }
-
-    public void setDifficulty(AIDifficulty difficulty) {
-        this.difficulty = difficulty;
     }
 
     @Override
