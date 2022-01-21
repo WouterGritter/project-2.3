@@ -7,6 +7,7 @@ import project23.framework.GameManager;
 import project23.framework.GameType;
 import project23.framework.board.Board;
 import project23.framework.player.MinimaxAIPlayer;
+import project23.framework.player.OnderzoekAIPlayer;
 import project23.framework.player.Player;
 import project23.othello.board.OthelloBoard;
 import project23.othello.player.OthelloBoardEvaluator;
@@ -30,12 +31,10 @@ public class OthelloGame extends Game {
     public BiFunction<Board, Integer, Player> createLocalPlayerFactory() {
         Logger.info("Overriding local player factory to an AI player for the research experiments.");
 
-        // TODO: Return our newly implemented AI player.
-        return (board, id) -> new MinimaxAIPlayer(
+        return (board, id) -> new OnderzoekAIPlayer(
                 board,
                 id,
                 "Research resit AI",
-                MinimaxAIPlayer.AIDifficulty.EASY,
                 new OthelloBoardEvaluator(),
                 6
         );

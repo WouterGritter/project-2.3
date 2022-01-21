@@ -41,16 +41,6 @@ public class MinimaxAIPlayer extends AIPlayer implements BoardObserver {
         board.registerObserver(this);
     }
 
-    public MinimaxAIPlayer(Board board, int id, AIDifficulty difficulty, BoardEvaluator boardEvaluator, int startDepth) {
-        super(board, id);
-
-        this.difficulty = difficulty;
-        this.boardEvaluator = boardEvaluator;
-        this.startDepth = startDepth;
-
-        board.registerObserver(this);
-    }
-
     /**
      * Only show valid moves when this AI player is part of a ConnectedGameManager
      */
