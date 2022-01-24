@@ -10,6 +10,7 @@ import project23.framework.player.MinimaxAIPlayer;
 import project23.framework.player.OnderzoekAIPlayer;
 import project23.framework.player.Player;
 import project23.othello.board.OthelloBoard;
+import project23.othello.player.GPUOthelloAI;
 import project23.othello.player.OthelloBoardEvaluator;
 import project23.util.Logger;
 
@@ -31,12 +32,10 @@ public class OthelloGame extends Game {
     public BiFunction<Board, Integer, Player> createLocalPlayerFactory() {
         Logger.info("Overriding local player factory to an AI player for the research experiments.");
 
-        return (board, id) -> new OnderzoekAIPlayer(
+        return (board, id) -> new GPUOthelloAI(
                 board,
                 id,
-                "Research resit AI",
-                new OthelloBoardEvaluator(),
-                6
+                "Research resit AI"
         );
     }
 
