@@ -11,7 +11,9 @@ Op het Othellotournooi van 2021 op de HBO-ICT studie van de Hanzehogeschool Gron
 
 ## Lokaal draaien
 
-Om het programma lokaal te draaien zal enkel maven geïnstalleerd moeten zijn. Wanneer maven geinstalleerd is, kan het programma uitgevoerd worden met het commando `mvn clean javafx:run`
+Om het programma lokaal te draaien zal enkel maven geïnstalleerd moeten zijn. Wanneer maven geinstalleerd is, kan het programma uitgevoerd worden met het commando `mvn clean javafx:run`.
+
+Om de GPUOthelloAI klasse te laten werken, moet het commando `make` uitgevoerd worden binnen de `gpu-othello` submodule folder binnen de juiste build environment. Zie `gpu-othello/README.md`.
 
 ## Toelichting AI implementatie
 

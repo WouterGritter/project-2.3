@@ -15,8 +15,7 @@ import java.util.List;
 
 public class GPUOthelloAI extends AIPlayer implements BoardObserver {
 
-    private static final String PROGRAM_NAME = "gpu-othello";
-    private final static int MAX_MEMORY_KB = 16777216;
+    private static final String PROGRAM_NAME = "gpu-othello/gpu-othello";
 
     private Process p;
     private BufferedReader br;
