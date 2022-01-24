@@ -1,16 +1,17 @@
 package project23.othello.player;
 
-import project23.framework.ConfigData;
 import project23.framework.board.Board;
 import project23.framework.board.BoardObserver;
 import project23.framework.board.BoardPiece;
 import project23.framework.player.AIPlayer;
 import project23.framework.player.Player;
+import project23.util.Logger;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
+import java.util.List;
 
 public class GPUOthelloAI extends AIPlayer implements BoardObserver {
 
@@ -52,7 +53,7 @@ public class GPUOthelloAI extends AIPlayer implements BoardObserver {
     private void printStdErr() {
         try {
             while (stderr.ready()) {
-                System.out.println(stderr.readLine());
+                Logger.info("FROM GPU: " + stderr.readLine());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -62,7 +63,8 @@ public class GPUOthelloAI extends AIPlayer implements BoardObserver {
     private BoardPiece calculateMove() {
         printStdErr();
 
-        int millisLeft = ConfigData.getInstance().getMinimaxThinkingTime();
+        int millisLeft = 200;
+//        int millisLeft = ConfigData.getInstance().getMinimaxThinkingTime();
 
         String line;
         try {
@@ -78,13 +80,12 @@ public class GPUOthelloAI extends AIPlayer implements BoardObserver {
                 printStdErr();
 
                 try {
-                    int exitvalue = p.exitValue();
-                    // If we got an exit value (versus exception), it means
-                    // the program has ended; don't wait for input.
+                    p.exitValue();
                     break;
                 } catch (IllegalThreadStateException e) {
                     // Program still running, don't do anything.
                 }
+
                 Thread.yield();
                 Thread.sleep(100);
             }
@@ -97,6 +98,7 @@ public class GPUOthelloAI extends AIPlayer implements BoardObserver {
                 String[] parts = line.split(" ");
                 int x = Integer.parseInt(parts[0]);
                 int y = Integer.parseInt(parts[1]);
+
                 return board.getBoardPiece(x, y);
             }
         } catch (Exception e) {
@@ -109,11 +111,25 @@ public class GPUOthelloAI extends AIPlayer implements BoardObserver {
     @Override
     public void requestMove() {
         BoardPiece move = calculateMove();
-        System.out.println("making move " + move);
+        opponentsMove = null;
+
+        List<BoardPiece> validMoves = board.getValidMoves(this);
+        if (validMoves.size() > 0) {
+            if (move == null) {
+                Logger.warning("GPU tried to skip, but we have more than 0 valid moves! Sending a random move..");
+                move = validMoves.get((int) (Math.random() * validMoves.size()));
+            } else if (!validMoves.contains(move)) {
+                Logger.warning("GPU to perform an illegal move! Sending a random move..");
+                move = validMoves.get((int) (Math.random() * validMoves.size()));
+            }
+        } else {
+            if (move != null) {
+                Logger.warning("GPU tried to perform a move while we are forced to skip! Skipping..");
+                move = null;
+            }
+        }
 
         board.makeMove(this, move);
-
-        opponentsMove = null;
     }
 
     @Override
@@ -124,15 +140,12 @@ public class GPUOthelloAI extends AIPlayer implements BoardObserver {
     public void onGameStart(Player startingPlayer) {
         String side = this.getID() == 0 ? "Black" : "White";
 
-        System.out.println("startingPlayer.getID() = " + startingPlayer.getID());
-        System.out.println("side = " + side);
-
         init(side);
     }
 
     @Override
     public void onPlayerMoved(Player who, BoardPiece where) {
-        if(who != this) {
+        if (who != this) {
             opponentsMove = where;
         }
     }
