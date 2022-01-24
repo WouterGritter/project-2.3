@@ -1,5 +1,6 @@
 package project23.othello.player;
 
+import project23.framework.ConfigData;
 import project23.framework.board.Board;
 import project23.framework.board.BoardObserver;
 import project23.framework.board.BoardPiece;
@@ -61,7 +62,7 @@ public class GPUOthelloAI extends AIPlayer implements BoardObserver {
     private BoardPiece calculateMove() {
         printStdErr();
 
-        final int millisLeft = 1000;
+        int millisLeft = ConfigData.getInstance().getMinimaxThinkingTime();
 
         String line;
         try {
