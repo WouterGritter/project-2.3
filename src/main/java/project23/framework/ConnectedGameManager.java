@@ -221,10 +221,16 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
 
         if(playerToBegin.equals(this.selfName)) {
             players.set(0, serverPlayer);
+            serverPlayer.setID(0);
+
             players.set(1, serverPlayerOpponent);
+            serverPlayerOpponent.setID(1);
         }else{
             players.set(1, serverPlayer);
+            serverPlayer.setID(1);
+
             players.set(0, serverPlayerOpponent);
+            serverPlayerOpponent.setID(0);
         }
 
         client.getCommunicationHandler().setServerPlayerCommunicationListener(serverPlayerOpponent);

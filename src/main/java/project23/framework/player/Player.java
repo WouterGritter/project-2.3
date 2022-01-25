@@ -8,7 +8,7 @@ import project23.framework.board.Board;
 public abstract class Player {
 
     protected final Board board;
-    protected final int id;
+    protected int id;
     protected String name;
 
     /**
@@ -59,6 +59,10 @@ public abstract class Player {
      */
     public int getID() {
         return id;
+    }
+
+    public void setID(int id) {
+        this.id = id;
     }
 
     /**
