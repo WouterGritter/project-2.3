@@ -37,9 +37,9 @@ public class ConfigData {
         // Config
         serverIP = "145.33.225.170";
         serverPort = 7789;
-        playerName = "C4";
+        playerName = "Herobrine";
         difficulty = MinimaxAIPlayer.AIDifficulty.HARD;
-        minimaxThinkingTime = 8000;
+        minimaxThinkingTime = 500;
 
         // Games
         registerGame(new TTTGame());
