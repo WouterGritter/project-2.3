@@ -214,8 +214,18 @@ public class ConnectedGameManager extends GameManager implements GameManagerComm
             throw new IllegalStateException("Could not find a server player.");
         }
 
+        Player serverPlayer = getOtherPlayer(serverPlayerOpponent);
+
         serverPlayerOpponent.setName(opponentName);
-        getOtherPlayer(serverPlayerOpponent).setName(this.selfName);
+        serverPlayer.setName(this.selfName);
+
+        if(playerToBegin.equals(this.selfName)) {
+            players.set(0, serverPlayer);
+            players.set(1, serverPlayerOpponent);
+        }else{
+            players.set(1, serverPlayer);
+            players.set(0, serverPlayerOpponent);
+        }
 
         client.getCommunicationHandler().setServerPlayerCommunicationListener(serverPlayerOpponent);
 
