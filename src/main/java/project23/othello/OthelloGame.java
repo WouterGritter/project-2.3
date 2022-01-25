@@ -30,17 +30,6 @@ public class OthelloGame extends Game {
 
     @Override
     public BiFunction<Board, Integer, Player> createLocalPlayerFactory() {
-        Logger.info("Overriding local player factory to an AI player for the research experiments.");
-
-        return (board, id) -> new GPUOthelloAI(
-                board,
-                id,
-                "Research resit AI"
-        );
-    }
-
-    @Override
-    public BiFunction<Board, Integer, Player> createAIPlayerFactory() {
         return (board, id) -> new MinimaxAIPlayer(
                 board,
                 id,
@@ -48,6 +37,17 @@ public class OthelloGame extends Game {
                 ConfigData.getInstance().getAIDifficulty(),
                 new OthelloBoardEvaluator(),
                 6
+        );
+    }
+
+    @Override
+    public BiFunction<Board, Integer, Player> createAIPlayerFactory() {
+        Logger.info("Overriding local player factory to an AI player for the research experiments.");
+
+        return (board, id) -> new GPUOthelloAI(
+                board,
+                id,
+                "Research resit AI"
         );
     }
 
